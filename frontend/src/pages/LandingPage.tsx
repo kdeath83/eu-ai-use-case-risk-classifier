@@ -8,8 +8,8 @@ export default function LandingPage() {
 
   const handleSubmit = () => {
     if (description.trim()) {
-      // Store the description and navigate to assessment
-      navigate('/assess', { state: { initialDescription: description } });
+      // Auto-classify and show results immediately
+      navigate('/result', { state: { description: description } });
     }
   };
 

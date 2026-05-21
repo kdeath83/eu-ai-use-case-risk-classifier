@@ -1,5 +1,6 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
+import QuickResultPage from './pages/QuickResultPage';
 import AssessmentPage from './pages/AssessmentPage';
 import ReportPage from './pages/ReportPage';
 
@@ -8,6 +9,7 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/result" element={<QuickResultPage />} />
         <Route path="/assess" element={<AssessmentPage />} />
         <Route path="/report/:id" element={<ReportPage />} />
       </Routes>
