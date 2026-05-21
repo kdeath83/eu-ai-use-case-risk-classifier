@@ -27,6 +27,12 @@ The entire frontend can run client-side — no backend server required for the G
 5. **Classification Report** — Generates a downloadable JSON report with **verified EU AI Act article citations**, priority-ranked next steps, and timeline context (high-risk obligations enter into force **2 August 2026**)
 6. **Next Steps & Compliance Actions** — Provides article-cited action items for both providers and deployers, including critical items like risk management system (Art. 9), data governance (Art. 10), conformity assessment (Art. 43), CE marking (Art. 48), and EU database registration (Art. 49)
 
+## 🔗 Live Demo
+
+**[→ Try the live demo on GitHub Pages](https://kdeath83.github.io/eu-ai-use-case-risk-classifier/)**
+
+The demo runs entirely in your browser — no backend required. All classification logic executes client-side, so you can test it instantly without any setup.
+
 ## 🚀 One-Click Deployment
 
 ### Option 1: GitHub Pages (Free — No Backend Required)
