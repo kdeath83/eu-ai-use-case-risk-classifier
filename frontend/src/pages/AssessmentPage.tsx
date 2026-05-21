@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import { buildReport } from '../services/report';
 import { scoreMaterialInfluence } from '../services/materialInfluence';
 import { detectProfiling } from '../services/profiling';
@@ -14,8 +15,11 @@ import ClassificationReport from '../components/ClassificationReport';
 import type { SystemInput, MaterialInfluenceResult, ProfilingResult, Article6FilterResult, AnnexIIIResult } from '../services/types';
 
 export default function AssessmentPage() {
+  const location = useLocation();
+  const initialDescription = (location.state as any)?.initialDescription || '';
+
   const [step, setStep] = useState(1);
-  const [systemData, setSystemData] = useState<SystemInput | null>(null);
+  const [systemData, setSystemData] = useState<SystemInput | null>(initialDescription ? { description: initialDescription } as SystemInput : null);
   const [annexIIIResults, setAnnexIIIResults] = useState<AnnexIIIResult[]>([]);
   const [materialInfluence, setMaterialInfluence] = useState<MaterialInfluenceResult | null>(null);
   const [profiling, setProfiling] = useState<ProfilingResult | null>(null);
