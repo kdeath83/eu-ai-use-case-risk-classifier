@@ -4,6 +4,26 @@ import { scoreMaterialInfluence } from './materialInfluence';
 import { detectProfiling } from './profiling';
 import { evaluateArticle6Filter } from './article6filter';
 
+/**
+ * AI-Powered Use Case Classifier
+ * 
+ * Based on Draft Commission Guidelines on Classification of High-Risk AI Systems
+ * https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems
+ * 
+ * This classifier auto-infers system properties from free-text descriptions and applies
+ * the Article 6 classification framework per the draft guidelines.
+ * 
+ * IMPORTANT LIMITATIONS:
+ * - Human involvement does NOT change high-risk classification under Article 6(2) (para 77)
+ * - This auto-detection is heuristic; definitive classification requires legal review
+ * - Annex I safety components require sectoral expertise and conformity assessment verification
+ * - Complex systems with split architectures must be assessed as whole per para 72
+ * 
+ * Entry into force (postponed via AI Omnibus):
+ * - Article 6(2) + Annex III: 2 December 2027
+ * - Article 6(1) + Annex I: 2 August 2028
+ */
+
 // Auto-infer system inputs from free text description
 export function autoClassifyFromDescription(description: string): {
   systemInput: SystemInput;
@@ -47,6 +67,9 @@ export function autoClassifyFromDescription(description: string): {
   }
 
   // Auto-detect human oversight
+  // NOTE: Per Draft Guidelines para 77, human involvement does NOT change high-risk 
+  // classification under Article 6(2). Human oversight is a compliance requirement (Art 14),
+  // not a classification exemption mechanism. We detect it for informational purposes only.
   const humanReview = !desc.includes('no human review') && !desc.includes('fully autonomous');
   const humanOverride = desc.includes('human can override') || desc.includes('human review') || humanReview;
 

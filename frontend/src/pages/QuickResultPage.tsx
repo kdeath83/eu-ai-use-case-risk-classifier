@@ -94,6 +94,10 @@ export default function QuickResultPage() {
           Confidence: {evidenceSummary.overallConfidence}%
         </p>
 
+        <p style={{ fontSize: '0.75rem', color: '#555', marginBottom: '1rem' }}>
+          Based on <a href="https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" target="_blank" rel="noopener noreferrer" style={{ color: '#00d4ff' }}>Draft Commission Guidelines on Classification of High-Risk AI Systems</a>
+        </p>
+
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <button className="btn btn-primary" onClick={handleExport}>
             <Download size={18} /> Export Report
@@ -226,6 +230,30 @@ export default function QuickResultPage() {
           </div>
         </div>
       )}
+
+      {/* Entry into Force Notice */}
+      <div className="card" style={{ marginBottom: '2rem', borderColor: '#ff6b35' }}>
+        <div className="card-title" style={{ color: '#ff6b35' }}>
+          <AlertTriangle size={20} color="#ff6b35" />
+          Entry into Force (AI Omnibus)
+        </div>
+        <p style={{ fontSize: '0.875rem', color: '#888', marginBottom: '0.75rem' }}>
+          Per Draft Guidelines para 448, high-risk obligations apply from:
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div>
+            <p style={{ color: '#e0e0e0', fontWeight: 600, marginBottom: '0.25rem' }}>Article 6(2) + Annex III</p>
+            <p style={{ color: '#888', fontSize: '0.875rem' }}>2 December 2027</p>
+          </div>
+          <div>
+            <p style={{ color: '#e0e0e0', fontWeight: 600, marginBottom: '0.25rem' }}>Article 6(1) + Annex I</p>
+            <p style={{ color: '#888', fontSize: '0.875rem' }}>2 August 2028</p>
+          </div>
+        </div>
+        <p style={{ fontSize: '0.75rem', color: '#555', marginTop: '1rem' }}>
+          Reference: <a href="https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" target="_blank" rel="noopener noreferrer" style={{ color: '#00d4ff' }}>Draft Commission Guidelines para 448</a>
+        </p>
+      </div>
 
       {/* Expandable Details */}
       <div className="card">

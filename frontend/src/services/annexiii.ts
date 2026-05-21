@@ -1,5 +1,20 @@
 import { SystemInput, AnnexIIIResult } from './types';
 
+/**
+ * Annex III Classification Engine
+ * 
+ * Based on Draft Commission Guidelines on Classification of High-Risk AI Systems
+ * https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems
+ * 
+ * Key principles from guidelines:
+ * - Article 6(2) + Annex III: Stand-alone AI systems posing significant risk to health, safety, fundamental rights
+ * - Human involvement does NOT affect classification (para 77)
+ * - Natural persons includes sole traders, self-employed, professionals (para 65)
+ * - Intended purpose determined by provider in instructions, marketing, technical docs (para 10-12)
+ * - Complex systems: Split architectures assessed as whole if combined outputs influence decisions (para 72)
+ * - Entry into force: 2 August 2026 (postponed to 2 December 2027 via AI Omnibus) - para 448
+ */
+
 const ANNEX_III_USE_CASES: Record<string, { useCase: string; keywords: string[]; description: string }[]> = {
   biometrics: [
     { useCase: 'Remote biometric identification', keywords: ['biometric', 'face recognition', 'facial', 'fingerprint', 'iris', 'retina', 'identification', 'verification', 'authentication', 'voice recognition', 'surveillance', 'CCTV'], description: 'AI systems used for remote biometric identification of natural persons' },
@@ -28,9 +43,33 @@ const ANNEX_III_USE_CASES: Record<string, { useCase: string; keywords: string[];
   ]
 };
 
+/**
+ * Annex I Safety Component Detection
+ * 
+ * Per Draft Guidelines Section III, Article 6(1) requires TWO cumulative conditions:
+ * 1. AI system is a safety component/product under Union harmonisation legislation (Annex I)
+ * 2. Product requires third-party conformity assessment
+ * 
+ * Safety component definition (Art 3(14)): Fulfils safety function OR failure/malfunction endangers health/safety
+ * Safety functions include: monitoring hazardous conditions, detecting safety risks, preventive/corrective actions,
+ * controlling safety-critical parameters, safe stop/emergency shutdown (para 41-44)
+ * 
+ * Note: This keyword-based detection is heuristic. Definitive classification requires sectoral expertise
+ * and verification of conformity assessment requirements under relevant Union harmonisation legislation.
+ */
 const ANNEX_I_KEYWORDS = [
-  'safety component', 'safety system', 'machinery safety', 'toy safety', 'medical device',
-  'radio equipment', 'pressure equipment', 'cableway', 'personal protective', 'construction product'
+  // Products covered by Union harmonisation legislation listed in Annex I AI Act
+  'machinery', 'toy', 'lift', 'elevator', 'equipment explosive atmosphere', 'atex',
+  'radio equipment', 'pressure equipment', 'recreational craft', 'cableway', 
+  'appliances burning gaseous fuels', 'gas appliance',
+  'medical device', 'in vitro diagnostic', 'ivd',
+  'automotive', 'aviation', 'aerospace', 'vehicle safety', 'car safety',
+  'personal protective equipment', 'ppe',
+  'construction product', 'building safety',
+  // Safety component indicators
+  'safety component', 'safety system', 'safety function', 'safety critical',
+  'emergency stop', 'safe stop', 'safety shutdown', 'safety monitoring',
+  'hazard detection', 'risk detection', 'safety control', 'safety parameter'
 ];
 
 const MAX_TEXT_LENGTH = 50000;
