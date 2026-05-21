@@ -13,7 +13,7 @@ export default function Layout({ children }: LayoutProps) {
         <p>EU AI Act Article 6 Compliance Assessment Tool</p>
       </header>
       {isMockMode && (
-        <div style={{ background: '#fef3c7', borderBottom: '1px solid #f59e0b', padding: '0.5rem 1rem', textAlign: 'center', fontSize: '0.875rem', color: '#92400e' }}>
+        <div style={{ background: '#451a03', borderBottom: '1px solid #f59e0b', padding: '0.5rem 1rem', textAlign: 'center', fontSize: '0.875rem', color: '#fcd34d' }}>
           <strong>Mock Mode:</strong> Running client-side classification. Connect to a backend for full API-powered analysis.
         </div>
       )}
