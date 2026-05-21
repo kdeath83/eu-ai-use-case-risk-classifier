@@ -75,6 +75,15 @@ export interface Article6FilterResult {
   recommendation: string;
 }
 
+export interface NextStep {
+  action: string;
+  article?: string;
+  deadline?: string;
+  priority: 'critical' | 'high' | 'medium' | 'low';
+  role: 'provider' | 'deployer' | 'both' | 'any';
+  applicable: boolean;
+}
+
 export interface ClassificationReport {
   id: string;
   timestamp: string;
@@ -91,5 +100,6 @@ export interface ClassificationReport {
     article6Rationale: string;
     overallConfidence: number;
   };
+  nextSteps: NextStep[];
   exportJson: any;
 }

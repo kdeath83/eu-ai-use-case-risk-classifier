@@ -1,4 +1,4 @@
-import { Download, RotateCcw, FileText, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
+import { Download, RotateCcw, FileText, AlertTriangle, CheckCircle, XCircle, Clock, Shield, User, Building } from 'lucide-react';
 
 interface ClassificationReportProps {
   report: any;
@@ -8,7 +8,7 @@ interface ClassificationReportProps {
 export default function ClassificationReport({ report, onRestart }: ClassificationReportProps) {
   if (!report) return null;
 
-  const { overallClassification, evidenceSummary, exportJson, materialInfluence, profiling, article6Filter } = report;
+  const { overallClassification, evidenceSummary, exportJson, materialInfluence, profiling, article6Filter, nextSteps } = report;
 
   const badgeClass = overallClassification === 'high-risk' ? 'badge-red' : overallClassification === 'not-high-risk' ? 'badge-green' : 'badge-amber';
   const badgeText = overallClassification === 'high-risk' ? 'HIGH-RISK' : overallClassification === 'not-high-risk' ? 'NOT HIGH-RISK' : 'BORDERLINE';
@@ -22,6 +22,27 @@ export default function ClassificationReport({ report, onRestart }: Classificati
     a.click();
     URL.revokeObjectURL(url);
   };
+
+  const priorityBadge = (priority: string) => {
+    const colors: Record<string, string> = {
+      critical: '#EF4444',
+      high: '#F59E0B',
+      medium: '#3B82F6',
+      low: '#6B7280'
+    };
+    return <span style={{ fontSize: '0.75rem', fontWeight: 600, color: colors[priority] || '#6B7280', textTransform: 'uppercase' }}>{priority}</span>;
+  };
+
+  const roleIcon = (role: string) => {
+    if (role === 'provider') return <Building size={14} color="#6B7280" />;
+    if (role === 'deployer') return <User size={14} color="#6B7280" />;
+    return <Shield size={14} color="#6B7280" />;
+  };
+
+  const applicableSteps = nextSteps?.filter((s: any) => s.applicable) || [];
+  const criticalSteps = applicableSteps.filter((s: any) => s.priority === 'critical');
+  const highSteps = applicableSteps.filter((s: any) => s.priority === 'high');
+  const otherSteps = applicableSteps.filter((s: any) => s.priority !== 'critical' && s.priority !== 'high');
 
   return (
     <div>
@@ -97,6 +118,101 @@ export default function ClassificationReport({ report, onRestart }: Classificati
         </div>
       </div>
 
+      {/* Next Steps */}
+      <div className="card">
+        <h3 className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <FileText size={20} />
+          Next Steps & Compliance Actions
+        </h3>
+        <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '1rem' }}>
+          Based on Regulation (EU) 2024/1689. High-risk obligations enter into force <strong>2 August 2026</strong>.
+        </p>
+
+        {criticalSteps.length > 0 && (
+          <div className="mb-4">
+            <h4 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#991b1b', marginBottom: '0.5rem', textTransform: 'uppercase' }}>
+              Critical Priority
+            </h4>
+            {criticalSteps.map((step: any, i: number) => (
+              <div key={`c-${i}`} className="flex items-start gap-3 mb-3" style={{ padding: '0.75rem', background: '#fef2f2', borderRadius: '0.5rem', border: '1px solid #fecaca' }}>
+                <div style={{ marginTop: '2px' }}>{roleIcon(step.role)}</div>
+                <div style={{ flex: 1 }}>
+                  <div className="flex justify-between items-center">
+                    <span style={{ fontWeight: 500, fontSize: '0.9375rem' }}>{step.action}</span>
+                    {priorityBadge(step.priority)}
+                  </div>
+                  <div style={{ fontSize: '0.8rem', color: '#6b7280', marginTop: '0.25rem' }}>
+                    {step.article && <span style={{ fontWeight: 600 }}>{step.article}</span>}
+                    {step.article && step.deadline && ' · '}
+                    {step.deadline && (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                        <Clock size={12} /> {step.deadline}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {highSteps.length > 0 && (
+          <div className="mb-4">
+            <h4 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#92400e', marginBottom: '0.5rem', textTransform: 'uppercase' }}>
+              High Priority
+            </h4>
+            {highSteps.map((step: any, i: number) => (
+              <div key={`h-${i}`} className="flex items-start gap-3 mb-3" style={{ padding: '0.75rem', background: '#fffbeb', borderRadius: '0.5rem', border: '1px solid #fde68a' }}>
+                <div style={{ marginTop: '2px' }}>{roleIcon(step.role)}</div>
+                <div style={{ flex: 1 }}>
+                  <div className="flex justify-between items-center">
+                    <span style={{ fontWeight: 500, fontSize: '0.9375rem' }}>{step.action}</span>
+                    {priorityBadge(step.priority)}
+                  </div>
+                  <div style={{ fontSize: '0.8rem', color: '#6b7280', marginTop: '0.25rem' }}>
+                    {step.article && <span style={{ fontWeight: 600 }}>{step.article}</span>}
+                    {step.article && step.deadline && ' · '}
+                    {step.deadline && (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                        <Clock size={12} /> {step.deadline}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {otherSteps.length > 0 && (
+          <div>
+            <h4 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#4b5563', marginBottom: '0.5rem', textTransform: 'uppercase' }}>
+              Medium / Low Priority
+            </h4>
+            {otherSteps.map((step: any, i: number) => (
+              <div key={`o-${i}`} className="flex items-start gap-3 mb-2" style={{ padding: '0.5rem 0.75rem', background: '#f8fafc', borderRadius: '0.5rem', border: '1px solid #e2e8f0' }}>
+                <div style={{ marginTop: '2px' }}>{roleIcon(step.role)}</div>
+                <div style={{ flex: 1 }}>
+                  <div className="flex justify-between items-center">
+                    <span style={{ fontWeight: 500, fontSize: '0.875rem' }}>{step.action}</span>
+                    {priorityBadge(step.priority)}
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.15rem' }}>
+                    {step.article && <span style={{ fontWeight: 600 }}>{step.article}</span>}
+                    {step.article && step.deadline && ' · '}
+                    {step.deadline && (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                        <Clock size={10} /> {step.deadline}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
       <div className="card" style={{ background: '#fefce8', border: '1px solid #fde047' }}>
         <h3 className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <FileText size={20} />
@@ -107,7 +223,7 @@ export default function ClassificationReport({ report, onRestart }: Classificati
         </p>
         <p className="mt-4" style={{ fontSize: '0.8rem', color: '#6b7280', fontStyle: 'italic' }}>
           Disclaimer: This report is generated by automated analysis and does not constitute legal advice.
-          Always consult qualified legal counsel for definitive classification under the EU AI Act.
+          Always consult qualified legal counsel for definitive classification under the EU AI Act (Regulation (EU) 2024/1689).
         </p>
       </div>
     </div>
