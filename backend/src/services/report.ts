@@ -37,6 +37,8 @@ function getNextSteps(
     { action: 'Undergo conformity assessment: internal control (Annex VI) or with notified body (Annex VII)', article: 'Art. 43', deadline: HIGH_RISK_DEADLINE, priority: 'critical', role: 'provider', applicable: true },
     { action: 'Establish post-market monitoring system (Commission template due 2 Feb 2026)', article: 'Art. 72', deadline: '2 February 2026 (template)', priority: 'high', role: 'provider', applicable: true },
     { action: 'Set up serious incident reporting procedure (15 days standard, 2 days widespread, immediate for death)', article: 'Art. 73', deadline: HIGH_RISK_DEADLINE, priority: 'high', role: 'provider', applicable: true },
+    { action: 'Do not split system into separately marketed components to evade classification — split architectures are assessed as a whole', article: 'Draft Guidelines para 75', deadline: HIGH_RISK_DEADLINE, priority: 'high', role: 'provider', applicable: true },
+    { action: 'Credit scoring: verify system evaluates natural persons (individuals), not just legal entities — point 5(b) only applies to natural persons', article: 'Draft Guidelines paras 73-74', deadline: HIGH_RISK_DEADLINE, priority: 'high', role: 'provider', applicable: sector === 'essential_services' || sector === 'none' },
   ];
 
   const deployerHighRisk: import('../types').NextStep[] = [
@@ -90,15 +92,11 @@ export function generateClassificationReport(input: SystemInput): Classification
   let overallClassification: ClassificationReport['overallClassification'];
   let overallConfidence = 0;
 
-  const anyAnnexIIITriggered = annexIIIResults.some(r => r.triggered && r.sector !== 'broad_marketing');
-  const broadMarketingTriggered = annexIIIResults.some(r => r.sector === 'broad_marketing' && r.triggered);
+  const anyAnnexIIITriggered = annexIIIResults.some(r => r.triggered && !r.sector.startsWith('broad_marketing'));
 
   if (profiling.absoluteRedFlag || (anyAnnexIIITriggered && article6Filter.outcome === 'likely_high_risk')) {
     overallClassification = 'high-risk';
     overallConfidence = 85;
-  } else if (broadMarketingTriggered && article6Filter.materialInfluenceExceeded) {
-    overallClassification = 'high-risk';
-    overallConfidence = 75;
   } else if (article6Filter.outcome === 'likely_high_risk') {
     overallClassification = 'high-risk';
     overallConfidence = 70;

@@ -120,19 +120,20 @@ export function classifyAnnexIII(input: SystemInput): AnnexIIIResult[] {
     });
   }
 
+  // NOTE: Broad marketing language is NOT a classification criterion under the EU AI Act
+  // or draft guidelines. Classification depends on intended purpose (Art. 6(2)), not
+  // marketing breadth. The following check is advisory only — it flags potentially
+  // misleading marketing but does NOT affect the classification outcome.
   const marketingText = clampText(input.marketingMaterials || '', MAX_TEXT_LENGTH).toLowerCase();
   const broadTerms = ['comprehensive', 'all-in-one', 'universal', 'every', 'any', 'all sectors', 'all industries', 'fully automated', 'end-to-end'];
-  let broadScore = 0;
-  for (const term of broadTerms) {
-    if (marketingText.includes(term)) broadScore += 10;
-  }
-  if (broadScore >= 20) {
+  const foundBroadTerms = broadTerms.filter(t => marketingText.includes(t));
+  if (foundBroadTerms.length >= 2) {
     results.push({
-      sector: 'broad_marketing',
-      useCase: 'Broad marketing suggests high-risk intended purpose',
-      confidenceScore: Math.min(100, 60 + broadScore),
-      triggered: true,
-      rationale: `Broad marketing language detected (${broadTerms.filter(t => marketingText.includes(t)).join(', ')}). Per para 12, this may indicate a high-risk intended purpose.`
+      sector: 'broad_marketing_advisory',
+      useCase: 'Advisory: Broad marketing language detected — verify intended purpose matches actual use',
+      confidenceScore: 0,
+      triggered: false,
+      rationale: `Broad marketing terms found (${foundBroadTerms.join(', ')}). Per draft guidelines para 77, classification depends on intended purpose, not marketing breadth. Review whether stated purpose matches actual use.`
     });
   }
 

@@ -40,6 +40,12 @@ export default function MaterialInfluenceWizard({ materialInfluence, onComplete,
           </div>
         )}
 
+        <div className="card" style={{ background: '#eff6ff', border: '1px solid #bfdbfe', marginBottom: '1rem' }}>
+          <p style={{ margin: 0, fontSize: '0.875rem', color: '#1e40af' }}>
+            <strong>Note:</strong> Per draft guidelines para 70, human involvement does not affect classification under Art. 6(2). A system with full human oversight is still high-risk if its intended purpose matches Annex III. Human oversight is a <strong>compliance requirement</strong> for high-risk systems (Art. 14), not a classification avoidance mechanism.
+          </p>
+        </div>
+
         <div className="mb-4">
           <label className="form-label">Material Influence Score</label>
           <div className="score-bar">
