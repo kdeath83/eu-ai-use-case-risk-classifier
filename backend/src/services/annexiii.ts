@@ -39,7 +39,7 @@ const ANNEX_III_USE_CASES: Record<string, { useCase: string; keywords: string[];
   essential_services: [
     {
       useCase: 'Access to essential services',
-      keywords: ['essential service', 'healthcare', 'insurance', 'credit', 'loan', 'banking', 'emergency', 'benefit', 'social', 'housing'],
+      keywords: ['essential service', 'healthcare', 'insurance', 'credit', 'loan', 'banking', 'bank', 'emergency', 'benefit', 'social', 'housing', 'pension', 'superannuation', 'super', 'mortgage', 'underwriting', 'claims', 'investment', 'wealth management', 'retirement', 'fund', 'financing', 'lending', 'underwriter', 'actuary', 'financial services'],
       description: 'AI systems for access to essential private and public services and benefits'
     }
   ],

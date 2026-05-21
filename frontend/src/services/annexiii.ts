@@ -15,7 +15,7 @@ const ANNEX_III_USE_CASES: Record<string, { useCase: string; keywords: string[];
     { useCase: 'Employment and workers management', keywords: ['employment', 'recruitment', 'hiring', 'worker', 'employee', 'performance', 'promotion', 'termination', 'monitoring', 'workplace'], description: 'AI systems for recruitment, selection, promotion, termination, or monitoring workers' }
   ],
   essential_services: [
-    { useCase: 'Access to essential services', keywords: ['essential service', 'healthcare', 'insurance', 'credit', 'loan', 'banking', 'emergency', 'benefit', 'social', 'housing'], description: 'AI systems for access to essential private and public services and benefits' }
+    { useCase: 'Access to essential services', keywords: ['essential service', 'healthcare', 'insurance', 'credit', 'loan', 'banking', 'bank', 'emergency', 'benefit', 'social', 'housing', 'pension', 'superannuation', 'super', 'mortgage', 'underwriting', 'claims', 'investment', 'wealth management', 'retirement', 'fund', 'financing', 'lending', 'underwriter', 'actuary', 'financial services'], description: 'AI systems for access to essential private and public services and benefits' }
   ],
   law_enforcement: [
     { useCase: 'Law enforcement', keywords: ['law enforcement', 'police', 'investigation', 'crime', 'criminal', 'risk assessment', 'polygraph', 'evidence', 'detective'], description: 'AI systems used by law enforcement authorities or on their behalf' }
