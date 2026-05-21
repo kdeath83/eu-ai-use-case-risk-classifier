@@ -4,9 +4,12 @@
 
 [![Deploy to AWS](https://img.shields.io/badge/Deploy-AWS-FF9900?logo=amazon-aws&logoColor=white)](https://github.com/kdeath83/eu-ai-use-case-risk-classifier#aws-full-stack-with-backend)
 [![GitHub Pages](https://img.shields.io/badge/Host-GitHub%20Pages-222?logo=github&logoColor=white)](https://github.com/kdeath83/eu-ai-use-case-risk-classifier#github-pages-free-static-hosting)
+[![Guidelines](https://img.shields.io/badge/Guidelines-EU%20Commission-003399?logo=european-union&logoColor=white)](https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 An automated classifier that determines whether your AI system qualifies as **high-risk** under the EU AI Act, with specific support for **banking, insurance, superannuation/pension, credit scoring, wealth management, underwriting, lending, and other essential financial services** (Annex III, point 5). Built to help compliance teams, legal advisors, and risk officers in EU-regulated financial institutions navigate the Article 6 classification process, including the material influence assessment, profiling detection, and the Article 6(3) exemption filter.
+
+> **📚 Classification Methodology:** This tool implements the **[Draft Commission Guidelines on the Classification of High-Risk AI Systems](https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems)** issued under Article 6(5) of Regulation (EU) 2024/1689. The guidelines provide the Commission's official interpretation of high-risk classification criteria, including practical examples and horizontal principles for Article 6(1) (Annex I safety components) and Article 6(2) (Annex III use cases).
 
 ## What It Does
 
@@ -24,7 +27,7 @@ The entire frontend can run client-side — no backend server required for the G
 2. **Material Influence Scoring** — Assesses whether the system materially influences decision outcomes (0-100 scale) per Article 6(3), with clear guidance that human oversight is a compliance requirement (Art. 14), not a classification avoidance mechanism
 3. **Profiling Detection** — Checks if the system processes personal data to evaluate personal aspects (GDPR Art. 4(4) cross-check), which absolutely excludes the Art. 6(3) filter
 4. **Article 6(3) Filter Wizard** — Navigates the 5 alternative filter conditions with guided decision logic
-5. **Classification Report** — Generates a downloadable JSON report with **verified EU AI Act article citations**, priority-ranked next steps, and timeline context (high-risk obligations enter into force **2 August 2026**)
+5. **Classification Report** — Generates a downloadable JSON report with **verified EU AI Act article citations** referencing the [Draft Commission Guidelines](https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems), priority-ranked next steps, and timeline context (high-risk obligations enter into force **2 December 2027** for Annex III / **2 August 2028** for Annex I per the AI Omnibus)
 6. **Next Steps & Compliance Actions** — Provides article-cited action items for both providers and deployers, including critical items like risk management system (Art. 9), data governance (Art. 10), conformity assessment (Art. 43), CE marking (Art. 48), and EU database registration (Art. 49)
 
 ## 🔗 Live Demo
@@ -132,9 +135,27 @@ App runs on `http://localhost:3000` (proxies `/api` to backend)
 6. Review the Article 6(3) filter assessment
 7. View the classification report and export as JSON
 
+## Legal Basis & Methodology
+
+This classifier implements the **[Draft Commission Guidelines on the Classification of High-Risk AI Systems](https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems)** issued pursuant to **Article 6(5)** of Regulation (EU) 2024/1689 (the AI Act).
+
+### Key Principles from the Draft Guidelines
+
+| Principle | Implementation | Guidelines Reference |
+|-----------|---------------|----------------------|
+| **Human involvement** | Does NOT affect high-risk classification under Article 6(2) | Para 77 |
+| **Profiling exclusion** | Systems performing profiling are ALWAYS high-risk; Article 6(3) filter inapplicable | Para 89, Art 6(3) third sub-paragraph |
+| **Filter conditions** | Narrow interpretation of Article 6(3)(a)-(d) conditions; alternative but not cumulative | Para 88 |
+| **Safety components** | Annex I: Must fulfil safety function (Art 3(14)) AND require third-party conformity assessment | Section III, para 27 |
+| **Natural persons** | Includes sole traders, self-employed, professionals (not just consumers) | Para 65 |
+| **Complex systems** | Split architectures assessed as whole if combined outputs materially influence decisions | Para 72 |
+| **Entry into force** | Postponed via AI Omnibus: Annex III = 2 Dec 2027; Annex I = 2 Aug 2028 | Para 448 |
+
+> **Disclaimer:** These Guidelines are still a draft document published for stakeholder feedback. The Commission may adopt a finalized version after consultation with the AI Board and stakeholders. Authoritative interpretation of the AI Act may ultimately only be given by the Court of Justice of the European Union (CJEU).
+
 ## Key Features
 
-- **Verified Article Citations** — Next steps include specific Regulation (EU) 2024/1689 article references with deadline context (e.g., Art. 9 risk management, Art. 10 data governance, Art. 43 conformity assessment, Art. 48 CE marking)
+- **Verified Article Citations** — Next steps include specific Regulation (EU) 2024/1689 article references and [Draft Commission Guidelines](https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems) paragraph references with deadline context (e.g., Art. 9 risk management, Art. 10 data governance, Art. 43 conformity assessment, Art. 48 CE marking)
 - **Provider vs. Deployer Role Separation** — Action items tagged for providers, deployers, or both, reflecting that most financial services institutions are deployers rather than providers
 - **Conditional FRIA Flagging** — Fundamental Rights Impact Assessment (Art. 27) automatically flagged for public bodies, public service providers, and insurance/credit systems
 - **Live material influence score** — Visual score bar that updates as you answer questions, with clear guidance on the distinction between compliance and classification
