@@ -7,7 +7,6 @@ import { evaluateArticle6Filter } from './article6filter';
 
 function computeOverallClassification(
   annexIIIResults: AnnexIIIResult[],
-  materialInfluence: MaterialInfluenceResult,
   profiling: ProfilingResult,
   article6Filter: Article6FilterResult
 ): { classification: ClassificationReport['overallClassification']; confidence: number } {
@@ -48,7 +47,7 @@ export function buildReport(
   article6Filter: Article6FilterResult
 ): ClassificationReport {
   const { classification: overallClassification, confidence: overallConfidence } = computeOverallClassification(
-    annexIIIResults, materialInfluence, profiling, article6Filter
+    annexIIIResults, profiling, article6Filter
   );
 
   const evidenceSummary = {

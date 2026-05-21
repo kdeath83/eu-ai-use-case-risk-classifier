@@ -17,7 +17,9 @@ export class LruCache<K, V> {
     if (this.cache.has(key)) this.cache.delete(key);
     else if (this.cache.size >= this.maxSize) {
       const first = this.cache.keys().next().value;
-      this.cache.delete(first);
+      if (first !== undefined) {
+        this.cache.delete(first);
+      }
     }
     this.cache.set(key, value);
   }

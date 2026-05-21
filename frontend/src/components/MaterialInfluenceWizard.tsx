@@ -1,14 +1,13 @@
 import { ArrowRight, ArrowLeft, AlertTriangle } from 'lucide-react';
-import type { SystemInput, MaterialInfluenceResult } from '../services/types';
+import type { MaterialInfluenceResult } from '../services/types';
 
 interface MaterialInfluenceWizardProps {
-  systemData: SystemInput | null;
   materialInfluence: MaterialInfluenceResult;
   onComplete: () => void;
   onBack: () => void;
 }
 
-export default function MaterialInfluenceWizard({ systemData, materialInfluence, onComplete, onBack }: MaterialInfluenceWizardProps) {
+export default function MaterialInfluenceWizard({ materialInfluence, onComplete, onBack }: MaterialInfluenceWizardProps) {
   const { score, exceedsThreshold, answers, rationale } = materialInfluence;
 
   const questions = [

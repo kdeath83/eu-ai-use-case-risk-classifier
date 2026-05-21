@@ -1,8 +1,7 @@
 import { ArrowRight, ArrowLeft, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
-import type { SystemInput, MaterialInfluenceResult, ProfilingResult, Article6FilterResult } from '../services/types';
+import type { MaterialInfluenceResult, ProfilingResult, Article6FilterResult } from '../services/types';
 
 interface FilterWizardProps {
-  systemData: SystemInput | null;
   materialInfluence: MaterialInfluenceResult;
   profiling: ProfilingResult;
   article6Filter: Article6FilterResult;
@@ -11,7 +10,6 @@ interface FilterWizardProps {
 }
 
 export default function FilterWizard({
-  systemData,
   materialInfluence,
   profiling,
   article6Filter,

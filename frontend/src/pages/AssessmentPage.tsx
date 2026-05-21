@@ -92,14 +92,13 @@ export default function AssessmentPage() {
 
       {!loading && step === 2 && materialInfluence && (
         <MaterialInfluenceWizard
-          systemData={systemData}
           materialInfluence={materialInfluence}
           onComplete={() => setStep(3)}
           onBack={() => setStep(1)}
         />
       )}
 
-      {!loading && step === 3 && profiling && (
+      {!loading && step === 3 && profiling && systemData && (
         <ProfilingCheck
           systemData={systemData}
           profiling={profiling}
@@ -110,7 +109,6 @@ export default function AssessmentPage() {
 
       {!loading && step === 4 && materialInfluence && profiling && article6Filter && (
         <FilterWizard
-          systemData={systemData}
           materialInfluence={materialInfluence}
           profiling={profiling}
           article6Filter={article6Filter}
