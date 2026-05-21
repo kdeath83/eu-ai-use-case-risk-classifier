@@ -8,11 +8,11 @@ An automated classifier that determines whether your AI system qualifies as **hi
 
 This tool helps EU-regulated financial services institutions determine whether their AI system is **high-risk** under Regulation (EU) 2024/1689 (the EU AI Act), specifically focusing on **Article 6 classification** and the **Article 6(3) exemption filter**. It covers:
 
-- **Banking** — credit scoring, loan approval, mortgage assessment, lending decisions
-- **Insurance** — underwriting, claims processing, risk assessment, policy pricing
-- **Superannuation / Pensions** — retirement fund management, pension eligibility, contribution assessment
-- **Wealth Management** — investment advisory, portfolio management, financial planning
-- **Essential Services** — access to emergency services, social benefits, public services
+- **Banking** — credit scoring, loan approval, mortgage assessment, lending decisions  
+- **Insurance** — underwriting, claims processing, risk assessment, policy pricing  
+- **Superannuation / Pensions** — retirement fund management, pension eligibility, contribution assessment  
+- **Wealth Management** — investment advisory, portfolio management, financial planning  
+- **Essential Services** — access to emergency services, social benefits, public services  
 
 The entire frontend can run client-side — no backend server required for the GitHub Pages demo. It performs:
 
