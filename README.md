@@ -2,6 +2,10 @@
 
 **EU AI Act Article 6 Compliance Assessment Tool for Financial Services Institutions**
 
+[![Deploy to AWS](https://img.shields.io/badge/Deploy-AWS-FF9900?logo=amazon-aws&logoColor=white)](https://github.com/kdeath83/eu-ai-use-case-risk-classifier#aws-full-stack-with-backend)
+[![GitHub Pages](https://img.shields.io/badge/Host-GitHub%20Pages-222?logo=github&logoColor=white)](https://github.com/kdeath83/eu-ai-use-case-risk-classifier#github-pages-free-static-hosting)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+
 An automated classifier that determines whether your AI system qualifies as **high-risk** under the EU AI Act, with specific support for **banking, insurance, superannuation/pension, credit scoring, wealth management, underwriting, lending, and other essential financial services** (Annex III, point 5). Built to help compliance teams, legal advisors, and risk officers in EU-regulated financial institutions navigate the Article 6 classification process, including the material influence assessment, profiling detection, and the Article 6(3) exemption filter.
 
 ## What It Does
@@ -23,48 +27,42 @@ The entire frontend can run client-side — no backend server required for the G
 5. **Classification Report** — Generates a downloadable JSON report with **verified EU AI Act article citations**, priority-ranked next steps, and timeline context (high-risk obligations enter into force **2 August 2026**)
 6. **Next Steps & Compliance Actions** — Provides article-cited action items for both providers and deployers, including critical items like risk management system (Art. 9), data governance (Art. 10), conformity assessment (Art. 43), CE marking (Art. 48), and EU database registration (Art. 49)
 
-## One-Click Deployment
+## 🚀 One-Click Deployment
 
-### GitHub Pages (Free Static Hosting)
+### Option 1: GitHub Pages (Free — No Backend Required)
 
-The frontend can be deployed as a static site to GitHub Pages with zero backend required — all classification logic runs client-side.
+The frontend runs entirely client-side. Perfect for demos and lightweight compliance checks.
 
-**Prerequisites:**
-- GitHub repository with this code
-- GitHub Pages enabled in repo settings (Source: GitHub Actions)
+**[→ Deploy to GitHub Pages](https://github.com/kdeath83/eu-ai-use-case-risk-classifier#github-pages-free-static-hosting)**
 
-**Deploy:**
-1. Push to the `main` branch
-2. GitHub Actions automatically builds and deploys to `https://yourusername.github.io/eu-ai-use-case-risk-classifier/`
-
-**Or manually:**
 ```bash
 cd frontend
 npm install
 npm run build
-# Then push the dist/ folder to gh-pages branch, or use:
-npm run deploy  # requires gh-pages npm package
+# Push dist/ to gh-pages branch, or:
+npm run deploy  # requires gh-pages package
 ```
 
-### AWS (Full Stack with Backend)
+---
 
-Deploy the complete application (frontend + backend) to AWS using the provided CloudFormation template.
+### Option 2: AWS (Full Stack — Backend + Frontend)
 
-**Prerequisites:**
-- AWS CLI configured with credentials
-- Docker installed (for container build)
+Deploy the complete application with API backend, CDN, and custom domain.
 
-**One-click deploy:**
+**[→ Deploy to AWS](https://github.com/kdeath83/eu-ai-use-case-risk-classifier#aws-full-stack-with-backend)**
+
 ```bash
 chmod +x deploy-aws.sh
-./deploy-aws.sh
+./deploy-aws.sh your-domain.com
 ```
 
-This creates:
-- Amazon ECS Fargate cluster (backend API)
-- Amazon S3 + CloudFront (frontend static hosting)
-- Application Load Balancer
-- VPC with public/private subnets
+**What it creates:**
+| Component | Service |
+|---|---|
+| Backend API | Amazon ECS Fargate |
+| Frontend CDN | S3 + CloudFront |
+| Load Balancer | Application Load Balancer |
+| Network | VPC with public/private subnets |
 
 **Or manual CloudFormation:**
 ```bash
